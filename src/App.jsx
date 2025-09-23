@@ -16,8 +16,8 @@ function App() {
 
   return (
     <>
-        <h1>20 שאלות של גיא</h1>
-        <div>
+        <h1 className={`text-3xl font-bold`}>20 שאלות של גיא</h1>
+        <div className={'flex flex-col gap-3 my-3 mx-6'}>
             {
                 questions.map((question) => {
                     return <Question key={question.id} question={question.question} answer={question.answer}/>
