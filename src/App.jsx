@@ -1,29 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import {MyHeader} from "./components/MyHeader.jsx";
-import {Question} from "./components/Question.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx"
+import {BrowserRouter, Route, Routes} from "react-router";
+import {AuthProvider} from "./context/authContext/index.jsx";
 
 function App() {
 
-    const questions = [
-        {id: 1, question: "שאלה", answer: "תשובה"},
-        {id: 2, question: "שאלה", answer: "תשובה"},
-        {id: 3, question: "שאלה", answer: "תשובה"},
-        {id: 4, question: "שאלה", answer: "תשובה"},
-    ]
-
   return (
     <>
-        <h1 className={`text-3xl font-bold`}>20 שאלות של גיא</h1>
-        <div className={'flex flex-col gap-3 my-3 mx-6'}>
-            {
-                questions.map((question) => {
-                    return <Question key={question.id} question={question.question} answer={question.answer}/>
-                })
-            }
-        </div>
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='' element={<Home/>}/>
+                    <Route path={'/login'} element={<Login/>}/>
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
     </>
   )
 }
