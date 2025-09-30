@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { AiOutlineLike, AiOutlineDislike  } from "react-icons/ai";
+import RoundButton from "./RoundButton.jsx";
 
 const Statuses = {
     BLANK: "",
@@ -17,21 +18,16 @@ export function Question({question, answer}) {
         <div style={{display: revelAnswer ? "block" : "none"}}>
             <p className={`my-3`}>{answer}</p>
             <div className={'flex flex-row justify-around w-1/2 m-auto'} >
-                <RoundButton className={'bg-green-300 hover:bg-green-500'} onClick={()=>setStatus(Statuses.RIGHT)}>
-                        <AiOutlineLike/>
+                <RoundButton
+                    className={'bg-green-300 hover:bg-green-500'}
+                    onClick={()=>setStatus(Statuses.RIGHT)}
+                >
+                        <AiOutlineLike className={`w-6 h-6`}/>
                 </RoundButton>
-                <button onClick={()=>setStatus(Statuses.WRONG)}>
-                    <div className={'border-2 rounded-full p-2 bg-red-300'}>
-                        <AiOutlineDislike />
-                    </div>
-                </button>
+                <RoundButton className={'bg-red-300 hover:bg-red-500'} onClick={()=>setStatus(Statuses.WRONG)}>
+                        <AiOutlineDislike className={`w-6 h-6`}/>
+                </RoundButton>
             </div>
         </div>
     </div>
-}
-
-function RoundButton({children, onClick, className}) {
-    return <button className={`rounded-full border-2 p-2 ${className}`} onClick={onClick}>
-            {children}
-    </button>
 }
