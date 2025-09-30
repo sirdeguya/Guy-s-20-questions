@@ -9,6 +9,7 @@ export async function doSignInWithEmailAndPassword(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
 }
 
+// TODO add UI for signing out
 export function doSignOut() {
     return auth.signOut();
 }
