@@ -9,11 +9,12 @@ import {Navigate} from "react-router";
 
 
 function Login() {
-    const { userLoggedIn, currentUser } = useAuth()
+    const { userLoggedIn } = useAuth()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isSigninIn, setIsSigninIn] = useState(false)
+    //TODO add UI for error massages
     const [errorMassage, setErrorMassage] = useState("")
 
     async function onSignIn(e) {
@@ -35,7 +36,7 @@ function Login() {
 
     return (
         <>
-            { isSigninIn && (<Navigate to={"/"} replace={true}/>) }
+            { userLoggedIn && (<Navigate to={"/"} replace={true}/>) }
             <h1 className={`text-3xl font-bold`}>התחברות</h1>
             <div className={"w-2xs mx-auto"}>
                 <div>
