@@ -1,5 +1,5 @@
 import {Question} from "../components/Question.jsx";
-import {useAuth} from "../context/authContext/index.jsx";
+import {useAuth} from "../context/authContext.jsx";
 
 function Home() {
     const { currentUser, userLoggenIn } = useAuth()
