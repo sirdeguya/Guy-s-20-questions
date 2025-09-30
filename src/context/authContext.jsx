@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {auth} from "../../lib/firebase/firebase.js";
+import {auth} from "../lib/firebase/firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 
@@ -11,7 +11,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
-    const [userLoggenIn, setUserLoggedIn ] = useState(false)
+    const [userLoggedIn, setUserLoggedIn ] = useState(false)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
-        userLoggenIn,
+        userLoggenIn: userLoggedIn,
         loading
     }
 

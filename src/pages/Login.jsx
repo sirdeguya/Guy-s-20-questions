@@ -1,10 +1,9 @@
 import RoundButton from "../components/RoundButton.jsx";
-import {useAuth} from "../context/authContext/index.jsx";
+import {useAuth} from "../context/authContext.jsx";
 import {useState} from "react";
 import {
     doCreateUserWithEmailAndPassword,
     doSignInWithEmailAndPassword,
-    doSignInWithGoogle
 } from "../lib/firebase/auth.js";
 import {Navigate} from "react-router";
 
