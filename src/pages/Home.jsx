@@ -1,11 +1,8 @@
-import {Question} from "../components/Question.jsx";
 import {useAuth} from "../context/authContext.jsx";
 import {useEffect, useState} from "react";
 import {ref, onValue, query, limitToLast} from "firebase/database";
 import {database} from "../lib/firebase/firebase.js";
-import Input from "../components/Input.jsx";
 import RoundButton from "../components/RoundButton.jsx";
-import {IoTrashOutline} from "react-icons/io5";
 import {Link} from "react-router";
 
 function Home() {
