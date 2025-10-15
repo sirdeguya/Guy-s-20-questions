@@ -6,6 +6,7 @@ import {AuthProvider} from "./context/authContext.jsx";
 import QuizPage from "./pages/QuizPage.jsx";
 import NewQuiz from "./pages/NewQuiz.jsx";
 import EditQuiz from "./pages/EditQuiz.jsx";
+import NavBar from "./components/NavBar.jsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path={"/quiz/:quizId"} element={<QuizPage/>}/>
                     <Route path={"/quiz/:quizId/edit"} element={<EditQuiz/>}/>
                 </Routes>
+                <NavBar/>
             </BrowserRouter>
         </AuthProvider>
     </>
