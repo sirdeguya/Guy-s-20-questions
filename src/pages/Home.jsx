@@ -17,8 +17,6 @@ function Home() {
       });
     }, []);
 
-    console.log(quizzes)
-
   return (
     <div>
         <h1 className={`text-3xl font-bold`}>20 שאלות של גיא</h1>
@@ -28,7 +26,6 @@ function Home() {
             <div className={'flex flex-col gap-3 my-3'}>
                 {
                     Object.keys(quizzes).map((quizId) => {
-                        console.log(quizId)
                         return <QuizLine key={quizId} quizId={quizId} quiz={quizzes[quizId]}/>
                     })
                 }
