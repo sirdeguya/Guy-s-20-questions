@@ -13,7 +13,8 @@ function Home() {
       const newQuizzesRef = query(ref(database,'/quizzes'), limitToLast(10))
       onValue(newQuizzesRef, (snapshot) => {
         const data = snapshot.val();
-        setQuizzes(data)
+        const quizList = Object.entries(data).map(([ quizId, quiz ]) => ({id: quizId, ...quiz}))
+        setQuizzes(quizList)
       });
     }, []);
 
@@ -24,25 +25,23 @@ function Home() {
         <div className={"mx-6"}>
             <h2 className={"text-2xl text-start my-5"}>שאלונים אחרונים שנוצרו:</h2>
             <div className={'flex flex-col gap-3 my-3'}>
-                {
-                    Object.keys(quizzes).map((quizId) => {
-                        return <QuizLine key={quizId} quizId={quizId} quiz={quizzes[quizId]}/>
-                    })
-                }
+                {quizzes.map((quiz) => {
+                    return <QuizLine key={quiz.id} quiz={quiz}/>
+                })}
             </div>
         </div>
     </div>
   )
 }
 
-function QuizLine({ quizId, quiz }) {
+function QuizLine({ quiz }) {
     return (
         <div className={`border-2 rounded-2xl flex flex-row justify-between`}>
             <div className={`p-2 w-full flex items-center`}>
                 <h3>{quiz.title}</h3>
             </div>
             <div className={`p-2 flex flex-col justify-around border-s-2 border-dashed`}>
-                <Link to={`quiz/${quizId}`}>
+                <Link to={`quiz/${quiz.id}`}>
                     <RoundButton className={`bg-fuchsia-300 hover:bg-fuchsia-700`}>
                         שחק
                     </RoundButton>
