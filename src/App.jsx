@@ -14,9 +14,9 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home/>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/quiz'}>
-                        <Route path={":quizId"} element={<QuizPage/>}/>
-                    </Route>
+                    <Route  path={"/quiz/new"} element={<NewQuiz/>}/>
+                    <Route path={"/quiz/:quizId"} element={<QuizPage/>}/>
+                    <Route path={"/quiz:quizId/edit"} element={<EditQuiz/>}/>
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
