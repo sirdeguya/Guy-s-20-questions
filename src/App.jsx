@@ -4,6 +4,8 @@ import Login from "./pages/Login.jsx"
 import {BrowserRouter, Route, Routes} from "react-router";
 import {AuthProvider} from "./context/authContext.jsx";
 import QuizPage from "./pages/QuizPage.jsx";
+import NewQuiz from "./pages/NewQuiz.jsx";
+import EditQuiz from "./pages/EditQuiz.jsx";
 
 function App() {
 
