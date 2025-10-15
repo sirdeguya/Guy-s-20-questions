@@ -1,6 +1,6 @@
 import {useAuth} from "../context/authContext.jsx";
 import {useEffect, useState} from "react";
-import {ref, onValue, query, limitToLast, get} from "firebase/database";
+import {ref, onValue, query, limitToLast} from "firebase/database";
 import {database} from "../lib/firebase/firebase.js";
 import RoundButton from "../components/RoundButton.jsx";
 import {Link} from "react-router";
@@ -10,15 +10,12 @@ function Home() {
     const [ quizzes, setQuizzes ] = useState({})
 
     useEffect(() => {
-        getNewQuizData()
-    }, []);
-
-    async function getNewQuizData() {
-        const newQuizzesRef = query(ref(database,'/quizzes'), limitToLast(10))
-        const snapshot = await get(newQuizzesRef)
+      const newQuizzesRef = query(ref(database,'/quizzes'), limitToLast(10))
+      onValue(newQuizzesRef, (snapshot) => {
         const data = snapshot.val();
         setQuizzes(data)
-    }
+      });
+    }, []);
 
   return (
     <div>
