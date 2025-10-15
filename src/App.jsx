@@ -3,7 +3,6 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx"
 import {BrowserRouter, Route, Routes} from "react-router";
 import {AuthProvider} from "./context/authContext.jsx";
-import QuizPage from "./pages/QuizPage.jsx";
 
 function App() {
 
@@ -12,11 +11,8 @@ function App() {
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<Home/>}/>
+                    <Route path='' element={<Home/>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/quiz'}>
-                        <Route path={":quizId"} element={<QuizPage/>}/>
-                    </Route>
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
