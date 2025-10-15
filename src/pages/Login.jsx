@@ -6,7 +6,6 @@ import {
     doSignInWithEmailAndPassword,
 } from "../lib/firebase/auth.js";
 import {Navigate} from "react-router";
-import Input from "../components/Input.jsx";
 
 
 function Login() {
