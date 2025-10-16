@@ -44,7 +44,7 @@ function Login() {
                     <div className={"w-full border-2 rounded-2xl px-4 py-2 my-6"}>
                         <input className={`w-full`} id="email" type="text" placeholder={"אימייל"} onChange={(e)=> {setEmail(e.target.value)}}/>
                     </div>
-                    <Input id="password" type="password" placeholder={"סיסמא"} onChange={(e)=> {setPassword(e.target.value)}}/>
+                    <Input id="password" type="password" placeholder={"סיסמא"} value={password} onChange={(e)=> {setPassword(e.target.value)}}/>
                 </div>
                 { isSigninIn && "טוען" }
                 <div className={`flex flex-row justify-between`}>
