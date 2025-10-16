@@ -7,7 +7,7 @@ import {Link} from "react-router";
 
 function Home() {
     const { currentUser, userLoggedIn } = useAuth()
-    const [ quizzes, setQuizzes ] = useState({})
+    const [ quizzes, setQuizzes ] = useState([])
 
     useEffect(() => {
             getNewQuizData()
