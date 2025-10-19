@@ -51,27 +51,18 @@ export default function QuizForm({ quiz, onSave }) {
 
 
 function QuestionForm({questionData, index, questions, setQuestions}) {
-    const [ questionValue, setQuestionValue ] = useState(questionData.question)
-    const [ answerValue, setAnswerValue ] = useState(questionData.answer)
-
 
     function onQuestionChange(question, questionId) {
-        setQuestionValue(() => {
-            setQuestions(questions.map((questionItem) => {
-                console.log(questionItem)
-                return questionItem.id === questionId ? {...questionItem, question: question} : questionItem
-            }))
-            return question
-        })
+        setQuestions(questions.map((questionItem) => {
+            console.log(questionItem)
+            return questionItem.id === questionId ? {...questionItem, question: question} : questionItem
+        }))
     }
 
     function onAnswerChange(answer, questionId) {
-        setAnswerValue(() => {
-            setQuestions(questions.map((questionItem) => {
-                return questionItem.id === questionId ? {...questionItem, answer: answer} : questionItem
-            }))
-            return answer
-        })
+        setQuestions(questions.map((questionItem) => {
+            return questionItem.id === questionId ? {...questionItem, answer: answer} : questionItem
+        }))
     }
 
     function onQuestionDelete(e, questionId) {
@@ -83,8 +74,8 @@ function QuestionForm({questionData, index, questions, setQuestions}) {
     return (
         <div className={`border-2 rounded-2xl flex flex-row justify-between`}>
             <div className={`p-2 w-full`}>
-                <Input id="question" placeholder={`שאלה מספר ${index + 1}`} value={questionValue} onChange={(e) => {onQuestionChange(e.target.value, questionData.id)}}/>
-                <Input id="answer" placeholder={`התשובה`} value={answerValue} onChange={(e) => {onAnswerChange(e.target.value, questionData.id)}}/>
+                <Input id="question" placeholder={`שאלה מספר ${index + 1}`} value={questionData.question} onChange={(e) => {onQuestionChange(e.target.value, questionData.id)}}/>
+                <Input id="answer" placeholder={`התשובה`} value={questionData.answer} onChange={(e) => {onAnswerChange(e.target.value, questionData.id)}}/>
             </div>
             <div className={`p-2 flex flex-col justify-around border-s-2`}>
                 <RoundButton className={`bg-red-300 hover:bg-red-500`} onClick={(e) => onQuestionDelete(e, questionData.id)}>
