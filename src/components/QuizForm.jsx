@@ -6,14 +6,19 @@ import { IoTrashOutline } from "react-icons/io5";
 export default function QuizForm({ quiz, onSave }) {
     const [title, setTitle] = useState(quiz.title)
     const [questions, setQuestions] = useState(quiz.questions)
+    const [ questionIndex, setQuestionIndex ] = useState(Math.max(...quiz.questions.map((question) => question.id), 0))
     const [ isLoading, setIsLoading] = useState(false)
 
 
     function onAddQuestion(e) {
         e.preventDefault()
-        const questionCopy = [...questions]
-        questionCopy.push({question: "", answer: ""})
-        setQuestions(questionCopy)
+        setQuestionIndex((questionIndex) => {
+            const questionCopy = [...questions]
+            const newQuestionIndex = questionIndex + 1
+            questionCopy.push({id: newQuestionIndex, question: "", answer: ""})
+            setQuestions(questionCopy)
+            return newQuestionIndex
+        })
     }
 
     function onSaveClick(e) {
@@ -63,7 +68,6 @@ function QuestionForm({question, index, questions, setQuestions}) {
         e.preventDefault()
         const questionCopy = [...questions]
         questionCopy.splice(index, 1)
-        console.log(questions)
         setQuestions(questionCopy)
     }
 
