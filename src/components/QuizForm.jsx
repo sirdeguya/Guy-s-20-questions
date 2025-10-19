@@ -62,25 +62,6 @@ export default function QuizForm({ quiz, onSave }) {
 
 function QuestionForm({questionData, index, onQuestionChange, onQuestionDelete}) {
 
-    // function onQuestionChange(question, questionId) {
-    //     setQuestions(questions.map((questionItem) => {
-    //         console.log(questionItem)
-    //         return questionItem.id === questionId ? {...questionItem, question: question} : questionItem
-    //     }))
-    // }
-    //
-    // function onAnswerChange(answer, questionId) {
-    //     setQuestions(questions.map((questionItem) => {
-    //         return questionItem.id === questionId ? {...questionItem, answer: answer} : questionItem
-    //     }))
-    // }
-
-    // function onQuestionDelete(e, questionId) {
-    //     e.preventDefault()
-    //     setQuestions(questions.filter((question) => question.id !== questionId))
-    // }
-
-
     return (
         <div className={`border-2 rounded-2xl flex flex-row justify-between`}>
             <div className={`p-2 w-full`}>
