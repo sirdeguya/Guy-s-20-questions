@@ -13,10 +13,8 @@ export default function QuizForm({ quiz, onSave }) {
     function onAddQuestion(e) {
         e.preventDefault()
         setQuestionIndex((questionIndex) => {
-            const questionCopy = [...questions]
             const newQuestionIndex = questionIndex + 1
-            questionCopy.push({id: newQuestionIndex, question: "", answer: ""})
-            setQuestions(questionCopy)
+            setQuestions([...questions, {id: newQuestionIndex, question: "", answer: ""}])
             return newQuestionIndex
         })
     }
