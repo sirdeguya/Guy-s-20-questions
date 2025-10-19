@@ -35,8 +35,8 @@ export default function QuizForm({ quiz, onSave }) {
             <div>
                 <Input id={"title"} placeholder={"title"} value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <div className={`flex gap-2 flex-col`}>
-                    {questions.map((question, index, array) => {
-                        return <QuestionForm key={index} question={question} index={index} questions={array}
+                    {questions.map((question,index, array) => {
+                        return <QuestionForm key={question.id} questionData={question} index={index} questions={array}
                                              setQuestions={setQuestions}/>
                     })}
                 </div>
@@ -50,36 +50,44 @@ export default function QuizForm({ quiz, onSave }) {
 }
 
 
-function QuestionForm({question, index, questions, setQuestions}) {
+function QuestionForm({questionData, index, questions, setQuestions}) {
+    const [ questionValue, setQuestionValue ] = useState(questionData.question)
+    const [ answerValue, setAnswerValue ] = useState(questionData.answer)
 
-    function onQuestionChange(question) {
-        const questionCopy = [...questions]
-        questionCopy[index]['question'] = question
-        setQuestions(questionCopy)
+
+    function onQuestionChange(question, questionId) {
+        setQuestionValue(() => {
+            setQuestions(questions.map((questionItem) => {
+                console.log(questionItem)
+                return questionItem.id === questionId ? {...questionItem, question: question} : questionItem
+            }))
+            return question
+        })
     }
 
-    function onAnswerChange(answer) {
-        const questionCopy = [...questions]
-        questionCopy[index]['answer'] = answer
-        setQuestions(questionCopy)
+    function onAnswerChange(answer, questionId) {
+        setAnswerValue(() => {
+            setQuestions(questions.map((questionItem) => {
+                return questionItem.id === questionId ? {...questionItem, answer: answer} : questionItem
+            }))
+            return answer
+        })
     }
 
-    function onQuestionDelete(e) {
+    function onQuestionDelete(e, questionId) {
         e.preventDefault()
-        const questionCopy = [...questions]
-        questionCopy.splice(index, 1)
-        setQuestions(questionCopy)
+        setQuestions(questions.filter((question) => question.id !== questionId))
     }
 
 
     return (
         <div className={`border-2 rounded-2xl flex flex-row justify-between`}>
             <div className={`p-2 w-full`}>
-                <Input id="question" placeholder={`שאלה מספר ${index + 1}`} value={question.question} onChange={(e) => {onQuestionChange(e.target.value)}}/>
-                <Input id="answer" placeholder={`התשובה`} value={question.answer} onChange={(e) => {onAnswerChange(e.target.value)}}/>
+                <Input id="question" placeholder={`שאלה מספר ${index + 1}`} value={questionValue} onChange={(e) => {onQuestionChange(e.target.value, questionData.id)}}/>
+                <Input id="answer" placeholder={`התשובה`} value={answerValue} onChange={(e) => {onAnswerChange(e.target.value, questionData.id)}}/>
             </div>
             <div className={`p-2 flex flex-col justify-around border-s-2`}>
-                <RoundButton className={`bg-red-300 hover:bg-red-500`} onClick={onQuestionDelete}>
+                <RoundButton className={`bg-red-300 hover:bg-red-500`} onClick={(e) => onQuestionDelete(e, questionData.id)}>
                     <IoTrashOutline className={`w-6 h-6`}/>
                 </RoundButton>
             </div>
