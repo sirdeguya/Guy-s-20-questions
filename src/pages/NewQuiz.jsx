@@ -11,7 +11,7 @@ export default function NewQuiz() {
     const quizTemplate = {
         title: "",
         questions: [
-            {question: "", answer: ""}
+            {id: 1, question: "", answer: ""}
         ]
     }
 
