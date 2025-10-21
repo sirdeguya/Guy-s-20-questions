@@ -12,7 +12,7 @@ export default function EditQuiz() {
 
     const [quiz, setQuiz ] = useState(undefined)
 
-    async function onSave(quizData) {
+    async function handleEdit(quizData) {
         await set(ref(database, `quizzes/${quizId}`), {
             title: quizData.title,
             creator: quiz.creator,
@@ -35,7 +35,7 @@ export default function EditQuiz() {
     return (
         <div>
             <h1 className={`text-3xl font-bold`}>עריכת שאלון</h1>
-            {quiz && <QuizForm quiz={quiz} onSave={onSave}/>}
+            {quiz && <QuizForm quiz={quiz} onSubmit={handleEdit}/>}
         </div>
     )
 }

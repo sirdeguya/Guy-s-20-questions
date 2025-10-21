@@ -19,7 +19,6 @@ function Login() {
     const [errorMassage, setErrorMassage] = useState("")
 
     async function onSignIn(e) {
-        e.preventDefault()
         if (!isSigninIn) {
             setIsSigninIn(true)
             await doSignInWithEmailAndPassword(email, password)
@@ -27,11 +26,9 @@ function Login() {
     }
 
     async function onCreatingNewUser(e) {
-        e.preventDefault()
         if (!isSigninIn) {
             setIsSigninIn(true)
-            const result = await doCreateUserWithEmailAndPassword(email, password)
-            console.log(result)
+            await doCreateUserWithEmailAndPassword(email, password)
         }
     }
 
