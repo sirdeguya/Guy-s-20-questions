@@ -3,20 +3,16 @@ import RoundButton from "./RoundButton.jsx";
 import {useState} from "react";
 import { IoTrashOutline } from "react-icons/io5";
 
-export default function QuizForm({ quiz, onSave }) {
-    const [title, setTitle] = useState(quiz.title)
-    const [questions, setQuestions] = useState(quiz.questions)
-    const [ questionIndex, setQuestionIndex ] = useState(Math.max(...quiz.questions.map((question) => question.id), 0))
+export default function QuizForm({ quiz: initialQuiz, onSubmit }) {
+    const [title, setTitle] = useState(initialQuiz.title)
+    const [questions, setQuestions] = useState(initialQuiz.questions)
+    const [ nextQuestionIndex, setNextQuestionIndex ] = useState(Math.max(...initialQuiz.questions.map((question) => question.id), 0) +1)
     const [ isLoading, setIsLoading] = useState(false)
 
 
     function onAddQuestion(e) {
-        e.preventDefault()
-        setQuestionIndex((questionIndex) => {
-            const newQuestionIndex = questionIndex + 1
-            setQuestions([...questions, {id: newQuestionIndex, question: "", answer: ""}])
-            return newQuestionIndex
-        })
+        setQuestions([...questions, {id: nextQuestionIndex, question: "", answer: ""}])
+        setNextQuestionIndex((pevQuestionIndex) =>  pevQuestionIndex + 1)
     }
 
     function onQuestionChange(questionId, changeType, value) {
@@ -26,34 +22,33 @@ export default function QuizForm({ quiz, onSave }) {
     }
 
     function onQuestionDelete(e, questionId) {
-        e.preventDefault()
         setQuestions(questions.filter((question) => question.id !== questionId))
     }
 
-    function onSaveClick(e) {
+    function handleSubmit(e) {
         e.preventDefault()
         setIsLoading(true)
-        onSave({
+        onSubmit({
             title: title,
             questions: questions
         })
     }
 
     return (
-        <div>
+        <form onSubmit={!isLoading ? handleSubmit: undefined}>
             <div>
                 <Input id={"title"} placeholder={"title"} value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <div className={`flex gap-2 flex-col`}>
-                    {questions.map((question,index, array) => {
+                    {questions.map((question,index) => {
                         return <QuestionForm key={question.id} questionData={question} index={index} onQuestionChange={onQuestionChange} onQuestionDelete={onQuestionDelete}/>
                     })}
                 </div>
                 <RoundButton className={`bg-fuchsia-400 hover:bg-fuchsia-600`} onClick={onAddQuestion}>+</RoundButton>
             </div>
-            <RoundButton className={`bg-green-300 hover:bg-green-500`} onClick={!isLoading ? onSaveClick : undefined}>
+            <RoundButton className={`bg-green-300 hover:bg-green-500`} type={"submit"}>
                 שמור!
             </RoundButton>
-        </div>
+        </form>
     )
 }
 

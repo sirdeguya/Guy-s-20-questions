@@ -15,7 +15,7 @@ export default function NewQuiz() {
         ]
     }
 
-    async function onSave(quizData) {
+    async function handleSave(quizData) {
         const data = await push(ref(database, 'quizzes/'), {
             title: quizData.title,
             creator: currentUser.uid,
@@ -28,7 +28,7 @@ export default function NewQuiz() {
     return (
         <div>
             <h1 className={`text-3xl font-bold`}>שאלון חדש</h1>
-            <QuizForm quiz={quizTemplate} onSave={onSave}  />
+            <QuizForm quiz={quizTemplate} onSubmit={handleSave}  />
         </div>
     )
 }
