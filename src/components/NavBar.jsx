@@ -54,12 +54,7 @@ export default function NavBar() {
         },
     ]
 
-    const [ showLinksList, setShowLinksList ] = useState(navBarLinks)
-
-    useEffect(() => {
-        setShowLinksList([...navBarLinks.filter((link) => link.condition)])
-    }, [userLoggedIn]);
-
+    const showLinksList = [...navBarLinks.filter((link) => link.condition)]
 
     return (
         <>
