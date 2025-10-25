@@ -15,20 +15,29 @@ function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isSigninIn, setIsSigninIn] = useState(false)
-    //TODO add UI for error massages
     const [errorMassage, setErrorMassage] = useState("")
 
-    async function onSignIn(e) {
+    async function onSignIn() {
         if (!isSigninIn) {
             setIsSigninIn(true)
-            await doSignInWithEmailAndPassword(email, password)
+            try {
+                await doSignInWithEmailAndPassword(email, password)
+            } catch(firebaseError) {
+                setErrorMassage(firebaseError.message)
+                setIsSigninIn(false)
+            }
         }
     }
 
-    async function onCreatingNewUser(e) {
+    async function onCreatingNewUser() {
         if (!isSigninIn) {
             setIsSigninIn(true)
-            await doCreateUserWithEmailAndPassword(email, password)
+            try {
+                await doCreateUserWithEmailAndPassword(email, password)
+            } catch(firebaseError) {
+                setErrorMassage(firebaseError.message)
+                setIsSigninIn(false)
+            }
         }
     }
 
@@ -44,6 +53,7 @@ function Login() {
                     <Input id="password" type="password" placeholder={"סיסמא"} value={password} onChange={(e)=> {setPassword(e.target.value)}}/>
                 </div>
                 { isSigninIn && "טוען" }
+                <h4 className={`text-red-400 my-2.5`}>{errorMassage}</h4>
                 <div className={`flex flex-row justify-between`}>
                     <RoundButton className={`bg-green-300 hover:bg-green-500`} onClick={onSignIn}>
                         חבר אותי
