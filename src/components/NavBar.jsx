@@ -63,7 +63,7 @@ export default function NavBar() {
                 <div className={`flex flex-row justify-around`}>
                     {showLinksList.map((link) => {
                         return (
-                            <Link to={link.link} className={`flex flex-col`}>
+                            <Link key={link.title} to={link.link} className={`flex flex-col`}>
                                 <RoundButton className={link.style} onClick={link.onClick}>{link.icon}</RoundButton>
                                 {link.title}
                             </Link>
